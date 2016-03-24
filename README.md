@@ -1,2 +1,11 @@
 # loki
-this is a microservice try
+
+## Description
+  > loki is a microservice project 
+
+  * jdk8
+  * spring boot
+  * jpa
+  * mongodb
+   
+ 
