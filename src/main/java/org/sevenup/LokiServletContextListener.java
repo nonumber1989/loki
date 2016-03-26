@@ -1,6 +1,5 @@
-package org.sevenup;
 /*
- * Copyright 2012-2015 the original author or authors.
+ * Copyright 2012-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +14,24 @@ package org.sevenup;
  * limitations under the License.
  */
 
+package org.sevenup;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 
-/**
- * Sample WAR application
- */
-@SpringBootApplication
-public class SampleWarApplication extends SpringBootServletInitializer {
+import org.springframework.stereotype.Component;
 
-	public static void main(String[] args) {
-		SpringApplication.run(SampleWarApplication.class, args);
+@Component
+public class LokiServletContextListener implements ServletContextListener {
+
+	@Override
+	public void contextInitialized(ServletContextEvent sce) {
+		System.out.println("*** contextInitialized");
+	}
+
+	@Override
+	public void contextDestroyed(ServletContextEvent sce) {
+		System.out.println("*** contextDestroyed");
 	}
 
 }

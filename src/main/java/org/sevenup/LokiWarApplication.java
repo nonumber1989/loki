@@ -1,3 +1,4 @@
+package org.sevenup;
 /*
  * Copyright 2012-2015 the original author or authors.
  *
@@ -14,17 +15,19 @@
  * limitations under the License.
  */
 
-package org.sevenup.rest;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 
-@RestController
-public class MyController {
+/**
+ * Sample WAR application
+ */
+@SpringBootApplication
+public class LokiWarApplication extends SpringBootServletInitializer {
 
-	@RequestMapping("/")
-	public String hello() {
-		return "Hello World!";
+	public static void main(String[] args) {
+		SpringApplication.run(LokiWarApplication.class, args);
 	}
 
 }
