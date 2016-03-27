@@ -8,6 +8,7 @@ import org.sevenup.domain.Note;
 import org.sevenup.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LokiController {
 	@Autowired
 	private NoteRepository noteRepository;
-
+    @RequestMapping(method = RequestMethod.GET)
 	public List<Note> getNotes() {
 		List<Note> notes = this.noteRepository.findAll();
 		List<Note> notes2 =  notes.stream().filter(note -> note.getId()== 1).collect(Collectors.toList());
