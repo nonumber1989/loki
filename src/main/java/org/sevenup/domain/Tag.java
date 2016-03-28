@@ -24,6 +24,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Tag {
 
@@ -34,6 +36,7 @@ public class Tag {
 	private String name;
 
 	@ManyToMany(mappedBy = "tags")
+	@JsonBackReference
 	private List<Note> notes;
 
 	public long getId() {
