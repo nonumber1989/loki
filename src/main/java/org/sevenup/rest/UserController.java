@@ -7,14 +7,13 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.sevenup.common.exception.ResourceNotFoundException;
 import org.sevenup.domain.User;
 import org.sevenup.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,8 +57,11 @@ public class UserController {
 		return userRepository.save(user);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public User getUserById(@PathVariable Long id) {
-		return userRepository.findOne(id);
+		 
+			 throw new ResourceNotFoundException("hshshshshshshsh");
+//			 return userRepository.findOne(id);
+		
 	}
 }
