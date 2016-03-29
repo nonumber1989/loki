@@ -2,6 +2,7 @@ package org.sevenup.rest;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -59,9 +60,9 @@ public class UserController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public User getUserById(@PathVariable Long id) {
-		 
-			 throw new ResourceNotFoundException("hshshshshshshsh");
-//			 return userRepository.findOne(id);
+		     Optional<User> user = Optional.ofNullable(userRepository.findOne(id));
+//			 throw new ResourceNotFoundException("hshshshshshshsh");
+			 return user.orElseThrow(ResourceNotFoundException::new);
 		
 	}
 }
