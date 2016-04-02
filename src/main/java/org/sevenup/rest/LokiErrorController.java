@@ -39,6 +39,7 @@ public class LokiErrorController implements ErrorController {
 		if (parameter == null) {
 			return false;
 		}
+		
 		return !"false".equals(parameter.toLowerCase());
 	}
 

@@ -12,6 +12,7 @@ import org.sevenup.common.exception.ResourceNotFoundException;
 import org.sevenup.domain.User;
 import org.sevenup.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -28,26 +29,23 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
-	// @RequestMapping(method = RequestMethod.GET)
-	// public Map<User, Long> getUsers(@PageableDefault(page = 0, size = 10)
-	// Pageable pageable,
-	// @SortDefault(sort = "name", direction = Sort.Direction.DESC) Sort sort,
-	// @RequestParam(value = "memberId", required = false) String id) {
-	// List<User> users = (List<User>) userRepository.findAll();
-	// //
-	// users.stream().filter(user->user.getAge()==3).distinct().collect(Collectors.toList());
-	// Map<User, Long> groupMap = users.stream()
-	// .collect(Collectors.groupingBy(Function.identity(),
-	// Collectors.counting()));
-	// return groupMap;
-	// }
-
+	/**
+	 * the example /users?page=0&size=20&sort=id,desc&sort=name,asc
+	 * 
+	 * @param pageable
+	 * @param id
+	 * @return Pager
+	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public Map<User, Long> getUsers(
-			@PageableDefault(page = 0, size = 10, sort = "name", direction = Sort.Direction.DESC) Pageable pageable,
-			@RequestParam(value = "memberId", required = false) String id) {
+	public Page<User> getPageableUsers(
+			@PageableDefault(page = 0, size = 10, sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable) {
+		Page<User> pageUser = userRepository.findAll(pageable);
+		return pageUser;
+	}
+
+	@RequestMapping(value = "/group", method = RequestMethod.GET)
+	public Map<User, Long> getGroupedUsers(@RequestParam(value = "group", required = false) String group) {
 		List<User> users = (List<User>) userRepository.findAll();
-		// users.stream().filter(user->user.getAge()==3).distinct().collect(Collectors.toList());
 		Map<User, Long> groupMap = users.stream()
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 		return groupMap;
@@ -58,11 +56,14 @@ public class UserController {
 		return userRepository.save(user);
 	}
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public void deleteUser(@PathVariable Long id) {
+		userRepository.delete(id);
+	}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public User getUserById(@PathVariable Long id) {
-		     Optional<User> user = Optional.ofNullable(userRepository.findOne(id));
-//			 throw new ResourceNotFoundException("hshshshshshshsh");
-			 return user.orElseThrow(ResourceNotFoundException::new);
-		
+		Optional<User> user = Optional.ofNullable(userRepository.findOne(id));
+		return user.orElseThrow(ResourceNotFoundException::new);
 	}
 }
