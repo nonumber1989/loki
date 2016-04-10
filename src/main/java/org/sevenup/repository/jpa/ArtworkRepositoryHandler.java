@@ -2,7 +2,6 @@ package org.sevenup.repository.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 import org.sevenup.domain.Artwork;
 import org.sevenup.repository.ArtworkRepository;
@@ -21,7 +20,7 @@ public class ArtworkRepositoryHandler  implements ArtworkRepository {
 	}
 
 	@Override
-	@Transactional
+//	@Transactional
 	public void xxxx(Long id) {
 		Artwork a = new Artwork();
 		a.setName("eeeee");

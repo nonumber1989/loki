@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ArtworkServiceHandler implements ArtworkService {
@@ -37,6 +38,7 @@ public class ArtworkServiceHandler implements ArtworkService {
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
 		artworkRepository.xxxx(id);
 

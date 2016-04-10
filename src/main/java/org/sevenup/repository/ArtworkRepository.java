@@ -1,9 +1,5 @@
 package org.sevenup.repository;
 
-import org.sevenup.domain.Artwork;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.repository.NoRepositoryBean;
 //extends JpaRepository<Artwork, Long>,JpaSpecificationExecutor<Artwork>
 public interface ArtworkRepository  {
 
