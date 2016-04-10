@@ -56,3 +56,7 @@ insert into user(name,age) values ('Open33',3)
 insert into user(name,age) values ('Spring34',1)
 insert into user(name,age) values ('Apache35',2)
 insert into user(name,age) values ('Open36',3)
+
+
+insert into artwork(name) values ('Open36')
+insert into artwork(name) values ('Open37')
