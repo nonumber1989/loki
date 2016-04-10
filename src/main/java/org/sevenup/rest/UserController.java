@@ -1,10 +1,8 @@
 package org.sevenup.rest;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -44,10 +42,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/group", method = RequestMethod.GET)
-	public Map<User, Long> getGroupedUsers(@RequestParam(value = "group", required = false) String group) {
-		List<User> users = (List<User>) userService.findByPageable(null);
-		Map<User, Long> groupMap = users.stream()
-				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+	public Map<Long, Set<User>> getGroupedUsers(@RequestParam(value = "group", required = false) String group) {
+		Map<Long, Set<User>> groupMap = userService.findUsersGroupBy();
 		return groupMap;
 	}
 
