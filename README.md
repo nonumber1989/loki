@@ -6,6 +6,5 @@
   * jdk8
   * spring boot
   * jpa
-  * mongodb
    
  
