@@ -3,7 +3,7 @@ package org.sevenup.service;
 
 import org.sevenup.domain.Artwork;
 import org.sevenup.repository.ArtworkRepository;
-import org.sevenup.repository.jpa.ArtworkDefaultRepository;
+import org.sevenup.repository.springdata.ArtworkDefaultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +15,8 @@ public class ArtworkServiceHandler implements ArtworkService {
 	@Autowired
 	private ArtworkRepository artworkRepository;
 	@Autowired
-    private ArtworkDefaultRepository JpaRepository;
+	private ArtworkDefaultRepository JpaRepository;
+
 	@Override
 	public Page<Artwork> findByPageable(Pageable pageable) {
 		return JpaRepository.findAll(pageable);
@@ -23,7 +24,7 @@ public class ArtworkServiceHandler implements ArtworkService {
 
 	@Override
 	public Artwork findById(Long id) {
-		return  (Artwork) JpaRepository.findOne(id);
+		return (Artwork) JpaRepository.findOne(id);
 	}
 
 	@Override
@@ -39,9 +40,8 @@ public class ArtworkServiceHandler implements ArtworkService {
 
 	@Override
 	@Transactional
-	public void delete(Long id) {
-		artworkRepository.xxxx(id);
-
+	public Artwork delete(Long id) {
+		return artworkRepository.delete(id);
 	}
 
 	@Override

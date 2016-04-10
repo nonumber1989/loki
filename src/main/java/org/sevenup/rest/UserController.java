@@ -10,7 +10,7 @@ import javax.validation.Valid;
 
 import org.sevenup.common.exception.ResourceNotFoundException;
 import org.sevenup.domain.User;
-import org.sevenup.repository.UserRepository;
+import org.sevenup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 
 	/**
 	 * the example /users?page=0&size=20&sort=id,desc&sort=name,asc
@@ -39,13 +39,13 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.GET)
 	public Page<User> getPageableUsers(
 			@PageableDefault(page = 0, size = 10, sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable) {
-		Page<User> pageUser = userRepository.findAll(pageable);
+		Page<User> pageUser = userService.findByPageable(pageable);
 		return pageUser;
 	}
 
 	@RequestMapping(value = "/group", method = RequestMethod.GET)
 	public Map<User, Long> getGroupedUsers(@RequestParam(value = "group", required = false) String group) {
-		List<User> users = (List<User>) userRepository.findAll();
+		List<User> users = (List<User>) userService.findByPageable(null);
 		Map<User, Long> groupMap = users.stream()
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 		return groupMap;
@@ -53,17 +53,17 @@ public class UserController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public User createUser(@Valid @RequestBody User user) {
-		return userRepository.save(user);
+		return userService.save(user);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void deleteUser(@PathVariable Long id) {
-		 userRepository.delete(id);
+		userService.delete(id);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public User getUserById(@PathVariable Long id) {
-		Optional<User> user = Optional.ofNullable(userRepository.findOne(id));
+		Optional<User> user = Optional.ofNullable(userService.findById(id));
 		return user.orElseThrow(ResourceNotFoundException::new);
 	}
 }

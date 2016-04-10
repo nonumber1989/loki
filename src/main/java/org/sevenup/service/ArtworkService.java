@@ -20,6 +20,6 @@ public interface ArtworkService {
 
 	public long count();
 
-	public void delete(Long id);
+	public Artwork delete(Long id);
 
 }

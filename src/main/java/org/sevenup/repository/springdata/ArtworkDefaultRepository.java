@@ -1,4 +1,4 @@
-package org.sevenup.repository.jpa;
+package org.sevenup.repository.springdata;
 
 import org.sevenup.domain.Artwork;
 import org.springframework.data.repository.PagingAndSortingRepository;

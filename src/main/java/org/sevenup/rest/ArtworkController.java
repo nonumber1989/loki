@@ -41,7 +41,7 @@ public class ArtworkController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable Long id) {
-		 artworkService.delete(id);
+	public Artwork delete(@PathVariable Long id) {
+		 return artworkService.delete(id);
 	}
 }
