@@ -7,16 +7,18 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.sevenup.domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional(readOnly = true)
-public class UserServiceHandler extends LokiService<User,Long> implements UserService {
-//	@Autowired
-//	private UserDefaultRepository userRepository;
+public class UserServiceHandler implements UserService {
+	@Autowired
+	private PagingAndSortingRepository<User,Long> repository; 
 
 	@Override
 	public Page<User> findByPageable(Pageable pageable) {
