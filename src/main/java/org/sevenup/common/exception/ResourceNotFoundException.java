@@ -12,13 +12,15 @@ public class ResourceNotFoundException extends RuntimeException {
 	private static final long serialVersionUID = -62028714630315197L;
 
 	public ResourceNotFoundException() {
-		super();
-		// TODO Auto-generated constructor stub
+		this("Resource not found!");
 	}
 
 	public ResourceNotFoundException(String message) {
-		super(message);
-		// TODO Auto-generated constructor stub
+		this(message, null);
 	}
-	
+
+	public ResourceNotFoundException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
 }
