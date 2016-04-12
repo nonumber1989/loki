@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,9 +15,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @MappedSuperclass
-public class BaseEntity implements Serializable{
+public class BaseEntity implements Serializable {
 	/**
 	 * 
 	 */
@@ -26,14 +28,18 @@ public class BaseEntity implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected Long id;
 
-//	@Version
-//	private int version;
-	
+	// @JsonIgnore
+	@Version
+	private Long version;
+
 	@Basic
+	@JsonIgnore
+	@Column(updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createDate;
 
 	@Basic
+	@JsonIgnore
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modifyDate;
 
@@ -64,13 +70,13 @@ public class BaseEntity implements Serializable{
 		return createDate;
 	}
 
-//	public int getVersion() {
-//		return version;
-//	}
-//
-//	public void setVersion(int version) {
-//		this.version = version;
-//	}
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
