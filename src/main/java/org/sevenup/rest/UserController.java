@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.sevenup.common.exception.ResourceNotFoundException;
+import org.sevenup.domain.EntityVisibility;
 import org.sevenup.domain.User;
 import org.sevenup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 @RestController
 @RequestMapping("/users")
@@ -46,7 +49,8 @@ public class UserController {
 		Map<Long, Set<User>> groupMap = userService.findUsersGroupBy();
 		return groupMap;
 	}
-
+	
+	@JsonView(EntityVisibility.Public.class)
 	@RequestMapping(method = RequestMethod.POST)
 	public User createUser(@Valid @RequestBody User user) {
 		return userService.save(user);

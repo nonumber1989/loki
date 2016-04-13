@@ -1,14 +1,10 @@
 package org.sevenup.domain;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class User extends BaseEntity {
@@ -16,17 +12,21 @@ public class User extends BaseEntity {
 //	@NotNull
 //	@Size(min = 1, max = 25)
 //	@Pattern(regexp = "[A-Za-z ]*", message = "must contain only letters and spaces")
+	@JsonView(EntityVisibility.Public.class)
 	private String name;
 
 //	@NotEmpty
 //	@Email
+	@JsonView(EntityVisibility.Internal.class)
 	private String email;
 
 //	@NotNull
 //	@Size(min = 9, max = 12)
 //	@Digits(fraction = 0, integer = 12)
+	@JsonView(EntityVisibility.Detailed.class)
 	private String phoneNumber;
 	
+	@JsonView(EntityVisibility.Public.class)
 	@Range(min = 1, max = 120)
 	// @Digits(fraction = 0, integer = 10)
 	private int age;
