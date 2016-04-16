@@ -1,8 +1,37 @@
 package org.sevenup.domain;
 
-import javax.persistence.Entity;
+import java.util.Date;
 
-@Entity
-public class CollerberationFile extends BaseEntity{
+import org.springframework.data.annotation.Id;
+
+public class CollerberationFile {
+	@Id
+	private String id;
+	private Date createDate;
+	private Date modifyDate;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
 
 }
