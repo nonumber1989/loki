@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 public class CollerberationFile {
 	@Id
 	private String id;
+	private int age;
 	private Date createDate;
 	private Date modifyDate;
 
@@ -32,6 +33,14 @@ public class CollerberationFile {
 
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 }
