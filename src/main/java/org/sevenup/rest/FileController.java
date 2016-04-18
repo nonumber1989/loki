@@ -2,7 +2,7 @@ package org.sevenup.rest;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mongodb.BasicDBObject;
@@ -29,8 +29,8 @@ import com.mongodb.gridfs.GridFSInputFile;
 @RequestMapping("/files")
 public class FileController {
 
-	// @Autowired
-	// private GridFsTemplate gridFsTemplate;
+	 @Autowired
+	 private GridFsTemplate   gridFsTemplate;
 
 	// @CrossOrigin(origins = "http://localhost:9000")
 	@RequestMapping(method = RequestMethod.POST, value = "/upload")
@@ -72,18 +72,11 @@ public class FileController {
 	@RequestMapping(method = RequestMethod.GET, value = "/download")
 	public  void handleFileDownload(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		MongoClient mongo = new MongoClient("localhost", 27017);
-		DB db = mongo.getDB("lokiGridFS");
-		// Create instance of GridFS implementation
-		GridFS gridFs = new GridFS(db);
-		// Find the image with the name image1 using GridFS API
-		GridFSDBFile outputImageFile = gridFs.findOne("teststecebeebeb");
-		// Get the number of chunks
-		System.out.println("Total Chunks: " + outputImageFile.numChunks());
-		// Location of the image read from MongoDB to be written
-		// String imageLocation = "E:/steven1.png";
-		// outputImageFile.writeTo(imageLocation);
-		InputStream test = outputImageFile.getInputStream();
-		mongo.close();
+		
+		   List<GridFSDBFile> files = gridFsTemplate.find(null);
+		   MongoDataAutoConfiguration tte;
+		   for (GridFSDBFile file: files) {
+		     System.out.println(file);
+		   }
 	}
 }
