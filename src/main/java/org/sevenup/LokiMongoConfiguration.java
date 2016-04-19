@@ -39,7 +39,7 @@ class LokiMongoConfiguration extends AbstractMongoConfiguration {
 	@Bean
 	public GridFsTemplate gridFsTemplate() throws Exception {
 		 
-		return new GridFsTemplate(new MyMongoDbFactory((MongoClient) mongo(),"lokiGridFS"), mappingMongoConverter());
+		return new GridFsTemplate(new LokiMongoDbFactory((MongoClient) mongo(),"lokiGridFS"), mappingMongoConverter());
 	}
 	@Override
 	public MongoDbFactory mongoDbFactory() throws Exception {

@@ -46,7 +46,7 @@ import com.mongodb.WriteConcern;
  * @author Thomas Darimont
  * @author Christoph Strobl
  */
-public class MyMongoDbFactory implements DisposableBean, MongoDbFactory {
+public class LokiMongoDbFactory implements DisposableBean, MongoDbFactory {
 
 	private final Mongo mongo;
 	private final String databaseName;
@@ -65,7 +65,7 @@ public class MyMongoDbFactory implements DisposableBean, MongoDbFactory {
 	 * @throws UnknownHostException
 	 * @since 1.7
 	 */
-	public MyMongoDbFactory(MongoClientURI uri) throws UnknownHostException {
+	public LokiMongoDbFactory(MongoClientURI uri) throws UnknownHostException {
 		this(new MongoClient(uri), uri.getDatabase(), true);
 	}
 
@@ -76,11 +76,11 @@ public class MyMongoDbFactory implements DisposableBean, MongoDbFactory {
 	 * @param databaseName must not be {@literal null}.
 	 * @since 1.7
 	 */
-	public MyMongoDbFactory(MongoClient mongoClient, String databaseName) {
+	public LokiMongoDbFactory(MongoClient mongoClient, String databaseName) {
 		this(mongoClient, databaseName, false);
 	}
 
-	private MyMongoDbFactory(Mongo mongo, String databaseName, UserCredentials credentials,
+	private LokiMongoDbFactory(Mongo mongo, String databaseName, UserCredentials credentials,
 			boolean mongoInstanceCreated, String authenticationDatabaseName) {
 
 		if (mongo instanceof MongoClient && (credentials != null && !UserCredentials.NO_CREDENTIALS.equals(credentials))) {
@@ -111,7 +111,7 @@ public class MyMongoDbFactory implements DisposableBean, MongoDbFactory {
 	 * @param mongoInstanceCreated
 	 * @since 1.7
 	 */
-	private MyMongoDbFactory(MongoClient client, String databaseName, boolean mongoInstanceCreated) {
+	private LokiMongoDbFactory(MongoClient client, String databaseName, boolean mongoInstanceCreated) {
 
 		Assert.notNull(client, "MongoClient must not be null!");
 		Assert.hasText(databaseName, "Database name must not be empty!");
