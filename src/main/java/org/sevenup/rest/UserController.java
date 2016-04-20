@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PageableDefaults;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +39,7 @@ public class UserController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public Page<User> getPageableUsers(
-			@PageableDefault(page = 0, size = 10, sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable) {
+			@PageableDefaults(pageNumber = 0, value = 10, sortDir = Sort.Direction.DESC) Pageable pageable) {
 		Page<User> pageUser = userService.findByPageable(pageable);
 		return pageUser;
 	}
