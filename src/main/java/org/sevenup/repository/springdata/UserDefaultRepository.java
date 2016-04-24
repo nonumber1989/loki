@@ -1,8 +1,8 @@
 package org.sevenup.repository.springdata;
 
 import org.sevenup.domain.User;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.sevenup.repository.common.LokiPagingAndSortingRepository;
 
-public interface UserDefaultRepository extends PagingAndSortingRepository<User,Long>{
+public class UserDefaultRepository extends LokiPagingAndSortingRepository<User,Long> {
 
 }

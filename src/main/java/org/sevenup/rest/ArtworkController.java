@@ -26,6 +26,7 @@ public class ArtworkController {
 	@RequestMapping(method = RequestMethod.GET)
 	public Page<Artwork> getPageableArtworks(
 			@PageableDefault(page = 0, size = 10, sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable) {
+		artworkService.count();
 		Page<Artwork> pageArtwork = artworkService.findByPageable(pageable);
 		return pageArtwork;
 	}

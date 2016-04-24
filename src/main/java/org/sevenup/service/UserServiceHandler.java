@@ -7,10 +7,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.sevenup.domain.User;
-import org.sevenup.repository.springdata.UserDefaultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class UserServiceHandler implements UserService {
 	@Autowired
-	private UserDefaultRepository repository; 
+	private PagingAndSortingRepository<User,Long> repository; 
 
 	@Override
 	public Page<User> findByPageable(Pageable pageable) {
