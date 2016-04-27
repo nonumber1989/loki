@@ -1,11 +1,9 @@
 package org.sevenup.repository;
 
 import org.sevenup.domain.Artwork;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface ArtworkRepository {
-
-	public long count();
-
-	public Artwork delete(Long id);
+public interface ArtworkRepository extends PagingAndSortingRepository<Artwork,Long>{
+	public void test();
 
 }

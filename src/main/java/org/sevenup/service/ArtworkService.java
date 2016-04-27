@@ -1,7 +1,6 @@
 package org.sevenup.service;
 
 import org.sevenup.domain.Artwork;
-import org.sevenup.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
