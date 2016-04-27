@@ -1,5 +1,6 @@
 package org.sevenup.rest;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -26,6 +27,7 @@ public class ArtworkController {
 	@RequestMapping(method = RequestMethod.GET)
 	public Page<Artwork> getPageableArtworks(@PageableDefault(page = 0, size = 10, sort = { "id" }, direction = Direction.DESC)Pageable pageable) {
 		Page<Artwork> pageArtwork = artworkService.findByPageable(pageable);
+		List<Artwork> list = (List<Artwork>) artworkService.findAll();
 		return pageArtwork;
 	}
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)

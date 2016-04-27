@@ -49,4 +49,9 @@ public class ArtworkServiceHandler implements ArtworkService {
 		return artworkDefaultRepository.save(entity);
 	}
 
+	@Override
+	public Iterable<Artwork> findAll() {
+		return artworkDefaultRepository.findAll();
+	}
+
 }

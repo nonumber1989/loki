@@ -9,13 +9,11 @@ public interface ArtworkService {
 
 	public  Artwork  save(Artwork entity);
 
-//	public <S extends Artwork> Iterable<S> save(Iterable<S> entities);
-
 	public Artwork findById(Long id);
 
 	public boolean exists(Long id);
 
-//	public Iterable<User> findAll(Iterable<Long> ids);
+	public Iterable<Artwork> findAll();
 
 	public long count();
 

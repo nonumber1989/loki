@@ -94,7 +94,7 @@ public class LokiPagingAndSortingRepository<T, ID extends Serializable> implemen
 
 	@Override
 	public Iterable<T> findAll() {
-		return null;
+		return em.createQuery("Select t from " + getEntityName() + " t").getResultList();
 	}
 
 	@Override
